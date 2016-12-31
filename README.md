@@ -39,6 +39,16 @@ http://localhost:8080/
 http://localhost:8080/calc/{value}
 ```
 
+### spring-freemarker
+
+Spring MVC example with freemarker and java configuration.
+Run this application with ```java -jar target/spring-freemarker.jar```
+
+Available urls:
+```
+http://localhost:8080/
+```
+
 ### jersey
 
 Jersey example.
@@ -48,6 +58,16 @@ Available urls:
 ```
 http://localhost:8080/status
 http://localhost:8080/data?service={service}
+```
+
+### jersey-mustache
+
+Jersey with mustache example.
+Run this application with ```java -jar target/jersey-mustache.jar```
+
+Available urls:
+```
+http://localhost:8080/
 ```
 
 ### netty
