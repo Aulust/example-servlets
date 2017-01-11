@@ -14,7 +14,6 @@ import java.util.List;
 @Controller
 public class Home {
     private static Database database = new Database();
-    private static String qwer = "qw";
     static
     {
         database.add(new DatabaseRecord("first task"));
@@ -29,8 +28,7 @@ public class Home {
 
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public String init(@ModelAttribute("model") ModelMap model) {
-		model.addAttribute("name", "Test name");
-		model.addAttribute("comment", qwer);
+		model.addAttribute("name", "Todo list");
 
 		model.addAttribute("tasks", database.getAll());
 		return "index";

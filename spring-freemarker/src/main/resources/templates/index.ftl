@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Test Page</title>
+        <title>Todo list</title>
     </head>
     <body>
         <h1>${model.name}</h1>
-        <div>${model.comment}</div>
         <table>
             <tr>
                 <th></th><th>Task</th><th>Done</th><th>Change "done" mark</th>
