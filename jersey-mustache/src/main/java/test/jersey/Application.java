@@ -13,7 +13,7 @@ import org.eclipse.jetty.util.thread.QueuedThreadPool;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.mvc.mustache.MustacheMvcFeature;
 import org.glassfish.jersey.servlet.ServletContainer;
-import test.jersey.resource.IndexResource;
+import test.jersey.resource.MainResource;
 
 public class Application {
   public static void main(String[] args) throws Exception {
@@ -26,7 +26,7 @@ public class Application {
     ResourceConfig rc = new ResourceConfig();
     rc.property(MustacheMvcFeature.TEMPLATE_BASE_PATH, "templates");
     rc.register(MustacheMvcFeature.class);
-    rc.register(IndexResource.class);
+    rc.register(MainResource.class);
     rc.packages("test.jersey");
 
     ServletMapping servletMapping = new ServletMapping();

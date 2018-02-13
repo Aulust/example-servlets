@@ -13,8 +13,14 @@ import org.eclipse.jetty.util.thread.QueuedThreadPool;
 import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.servlet.ServletContainer;
-import test.jersey.resource.CrawlerResource;
+import test.jersey.resource.DataResource;
+import test.jersey.resource.ErrorResource;
 import test.jersey.resource.StatusResource;
+
+import javax.ws.rs.core.Response;
+import javax.ws.rs.ext.ExceptionMapper;
+import javax.ws.rs.ext.Provider;
+
 
 public class Application {
   public static void main(String[] args) throws Exception {
@@ -26,8 +32,10 @@ public class Application {
 
     ResourceConfig rc = new ResourceConfig();
     rc.register(JacksonFeature.class);
-    rc.register(CrawlerResource.class);
+    rc.register(DataResource.class);
+    rc.register(ErrorResource.class);
     rc.register(StatusResource.class);
+    rc.register(MyExceptionMapper.class);
 
     ServletMapping servletMapping = new ServletMapping();
     servletMapping.setServletName("jersey");
@@ -47,5 +55,15 @@ public class Application {
 
     server.start();
     server.join();
+  }
+
+  public static class TestException extends RuntimeException { }
+
+  @Provider
+  public static class MyExceptionMapper implements ExceptionMapper<TestException> {
+    @Override
+    public Response toResponse(TestException exception) {
+      return Response.ok("It is fine!").build();
+    }
   }
 }

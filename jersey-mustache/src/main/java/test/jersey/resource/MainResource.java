@@ -1,7 +1,6 @@
 package test.jersey.resource;
 
 import org.glassfish.jersey.server.mvc.Template;
-import javax.inject.Named;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -10,9 +9,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Path("/")
-@Named
 @Produces(MediaType.TEXT_HTML)
-public class IndexResource {
+public class MainResource {
   @GET
   @Template(name = "/main")
   public Map<String, Object> data() {

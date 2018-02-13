@@ -14,21 +14,39 @@ public class Main {
   public static void main(String[] args) throws Exception {
     Server server = new Server(8080);
 
-    ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
+    ServletContextHandler context = new ServletContextHandler();
 
-    context.setContextPath("/hello");
+    context.setContextPath("/");
 
     server.setHandler(context);
 
-    context.addServlet(new ServletHolder(new HelloServlet()), "/tt");
+    context.addServlet(new ServletHolder(HelloServlet.class), "/hello");
+    context.addServlet(new ServletHolder("more", MoreServlets.class), "/more");
     server.start();
+    server.join();
   }
 
   public static class HelloServlet extends HttpServlet {
+    @Override
+    public void init() throws ServletException {
+      System.out.println("Hello servlet init");
+    }
+
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
       response.setContentType("text/html");
       response.setStatus(HttpServletResponse.SC_OK);
       response.getWriter().println("Hello World");
+
+      getServletContext().getRequestDispatcher("/more").forward(request,response);
+    }
+  }
+
+  public static class MoreServlets extends HttpServlet {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      response.setContentType("text/html");
+      response.setStatus(HttpServletResponse.SC_OK);
+      response.getWriter().println("MOOOAR!");
     }
   }
 }

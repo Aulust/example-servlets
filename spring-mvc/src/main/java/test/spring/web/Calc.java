@@ -7,10 +7,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-public class App {
-	@RequestMapping(path="/calc/{value}", method = RequestMethod.GET)
-	public String calc(@PathVariable String value, Model model) {
-		model.addAttribute("value", value);
+@RequestMapping(path="/calc")
+public class Calc {
+	@RequestMapping(path="/{value}", method = RequestMethod.GET)
+	public String calc(@PathVariable Integer value, Model model) {
+		model.addAttribute("value", value + 1);
 		return "calc";
 	}
 }
